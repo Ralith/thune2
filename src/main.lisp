@@ -8,16 +8,6 @@
   (mapc (curry #'send to-send)
         (list (make-message "NICK" (conf-value conf :nick))
               (make-message "USER" (conf-value conf :user) "." "." (conf-value conf :real-name))))
-  ;; Establish autojoin handler
-  (add-handler 'autojoin
-               (lambda (channel message)
-                 (when (string= "001" (command message)) ;RPL_WELCOME; see RFC2812 section 5.1
-                   (send channel
-                         (make-message "JOIN"
-                                       (reduce (lambda (accum channel)
-                                                 (concatenate 'string
-                                                              accum "," channel))
-                                               (conf-value conf :channels)))))))
   ;; Spawn main threads
   (pexec (:name "Receiver")
     (handler-bind
@@ -29,7 +19,7 @@
                        while message
                        do
                        (format t "-> ~a~%" raw)
-                       (call-handlers to-send message))
+                       (call-handlers conf to-send message))
         (end-of-file ()
           (format t "Disconnected.~%")
           (send to-send nil))))
