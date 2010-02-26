@@ -7,4 +7,5 @@
             :depends-on ("package")
             :components
             ((:file "conf")
-             (:file "main")))))
+             (:file "irc")
+             (:file "main" :depends-on ("conf" "irc"))))))
