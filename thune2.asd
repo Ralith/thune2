@@ -1,6 +1,6 @@
 (asdf:defsystem :thune2
   :description "An IRC bot"
-  :depends-on (:ircl :alexandria)
+  :depends-on (:ircl :alexandria :chanl)
   :components
   ((:file "package")
    (:module "src"
