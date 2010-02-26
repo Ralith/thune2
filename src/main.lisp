@@ -1,5 +1,10 @@
 (in-package :thune2)
 
+(defhandler pong (socket message)
+  (when (string= (command message) "PING")
+    (setf (command message) "PONG")
+    (send socket message)))
+
 (defun main (&aux
              (conf (load-conf "./thune2.conf"))
              (connection (ircl:connect (conf-value conf :server)))
