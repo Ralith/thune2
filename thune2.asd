@@ -10,5 +10,6 @@
              (:file "conf")
              (:file "handler" :depends-on ("utils"))
              (:module "handlers" :depends-on ("handler") :components
-                      ((:file "autojoin")))
+                      ((:file "autojoin")
+                       (:file "combo")))
              (:file "main" :depends-on ("conf" "handler"))))))
