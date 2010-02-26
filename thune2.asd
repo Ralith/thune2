@@ -8,6 +8,5 @@
             :components
             ((:file "utils")
              (:file "conf")
-             (:file "irc")
              (:file "handler" :depends-on ("utils"))
-             (:file "main" :depends-on ("conf" "irc" "handler"))))))
+             (:file "main" :depends-on ("conf" "handler"))))))
