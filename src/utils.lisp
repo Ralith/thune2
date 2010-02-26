@@ -2,7 +2,7 @@
 
 (defmacro alist-set (alist key value &key test)
   (with-gensyms (old)
-    (once-only (alist key)
+    (once-only (key)
       `(let ((,old (assoc ,key ,alist ,@(when test `(:test ,test)))))
          (if ,old
              (setf (cdr ,old) ,value)
