@@ -6,6 +6,8 @@
    (:module "src"
             :depends-on ("package")
             :components
-            ((:file "conf")
+            ((:file "utils")
+             (:file "conf")
              (:file "irc")
-             (:file "main" :depends-on ("conf" "irc"))))))
+             (:file "handler" :depends-on ("utils"))
+             (:file "main" :depends-on ("conf" "irc" "handler"))))))
