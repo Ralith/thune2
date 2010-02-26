@@ -15,9 +15,9 @@
   "Defines and configures for use a new handler."
   `(add-handler ',name (lambda ,args ,@body)))
 
-(defun call-handlers (channel message)
+(defun call-handlers (conf channel message)
   "Spawns all handlers on MESSAGE."
   (mapcar (lambda (handler)
             (pexec (:name (format nil "Message handler: ~a" (car handler)))
-              (funcall (cdr handler) channel message)))
+              (funcall (cdr handler) conf channel message)))
           *handlers*))
