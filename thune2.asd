@@ -6,4 +6,5 @@
    (:module "src"
             :depends-on ("package")
             :components
-            ((:file "main")))))
+            ((:file "conf")
+             (:file "main")))))
