@@ -14,3 +14,10 @@
 (defmacro defhandler (name args &body body)
   "Defines and configures for use a new handler."
   `(add-handler ',name (lambda ,args ,@body)))
+
+(defun call-handlers (channel message)
+  "Spawns all handlers on MESSAGE."
+  (mapcar (lambda (handler)
+            (pexec (:name (format nil "Message handler: ~a" (car handler)))
+              (funcall (cdr handler) channel message)))
+          *handlers*))

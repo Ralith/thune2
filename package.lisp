@@ -1,2 +1,2 @@
 (defpackage :thune2
-  (:use :cl :alexandria :chanl))
+  (:use :cl :alexandria :chanl :ircl))
