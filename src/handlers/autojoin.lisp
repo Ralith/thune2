@@ -1,4 +1,5 @@
 (in-package :thune2)
+
 (defhandler autojoin (conf channel message)
   (when (string= "001" (command message)) ; RPL_WELCOME, defined in RFC2812 section 5.1
     (send channel
