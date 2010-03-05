@@ -1,4 +1,5 @@
 (in-package :thune2)
+(declaim (optimize (debug 3)))
 
 (defun conf-value (conf key)
   "Finds the value associated in alist CONF with symbol KEY, returning nil if no such key exists."

@@ -1,4 +1,5 @@
 (in-package :thune2)
+(declaim (optimize (debug 3)))
 
 (defvar *handlers* ()
   "Alist of handler names and function specifiers.")
@@ -13,11 +14,12 @@
 
 (defmacro defhandler (name args &body body)
   "Defines and configures for use a new handler."
+  (assert (= (length args) 3))
   `(add-handler ',name (lambda ,args ,@body)))
 
 (defun call-handlers (conf channel message)
   "Spawns all handlers on MESSAGE."
   (mapcar (lambda (handler)
-            (pexec (:name (format nil "Message handler: ~a" (car handler)))
+            (pexec (:name (format nil "Handler ~a" (car handler)))
               (funcall (cdr handler) conf channel message)))
           *handlers*))

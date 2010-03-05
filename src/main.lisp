@@ -1,9 +1,11 @@
 (in-package :thune2)
+(declaim (optimize (debug 3)))
 
-(defhandler pong (socket message)
+(defhandler pong (conf channel message)
+  (declare (ignore conf))
   (when (string= (command message) "PING")
     (setf (command message) "PONG")
-    (send socket message)))
+    (send channel message)))
 
 (defun main (&aux
              (conf (load-conf "./thune2.conf"))
@@ -38,5 +40,5 @@
        (send-message connection message))
     (format t "Send thread terminating.~%"))
   ;; Idle and quit
-  (sleep 10)
+  (sleep 60)
   (send to-send (make-message "QUIT")))
